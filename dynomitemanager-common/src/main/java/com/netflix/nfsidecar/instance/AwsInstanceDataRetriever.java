@@ -12,11 +12,13 @@ public class AwsInstanceDataRetriever implements InstanceDataRetriever {
     }
 
     public String getPublicHostname() {
-        return SystemUtils.getDataFromUrl("http://169.254.169.254/latest/meta-data/public-hostname");
+        // Using local-hostname because of private-vpc
+        return SystemUtils.getDataFromUrl("http://169.254.169.254/latest/meta-data/local-hostname");
     }
 
     public String getPublicIP() {
-        return SystemUtils.getDataFromUrl("http://169.254.169.254/latest/meta-data/public-ipv4");
+        // Using local-ipv4 because of private-vpc
+        return SystemUtils.getDataFromUrl("http://169.254.169.254/latest/meta-data/local-ipv4");
     }
 
     public String getInstanceId() {
